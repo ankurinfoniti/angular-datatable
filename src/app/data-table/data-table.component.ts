@@ -18,7 +18,7 @@ export class DataTableComponent {
   currentPage: number = 1;
   pageSize: number = 5;
 
-  suppliers: Array<Supplier> = [
+  suppliers: Supplier[] = [
     {
       name: 'Supplier 1',
       address: 'Address 1',
@@ -201,6 +201,8 @@ export class DataTableComponent {
     },
   ];
 
+  filteredSuppliers: Supplier[] = this.suppliers;
+
   ngOnInit(): void {
     this.visibleData();
     this.pageNumber();
@@ -210,7 +212,7 @@ export class DataTableComponent {
     let startIndex = (this.currentPage - 1) * this.pageSize;
     let endIndex = startIndex + this.pageSize;
 
-    return this.suppliers.slice(startIndex, endIndex);
+    return this.filteredSuppliers.slice(startIndex, endIndex);
   }
 
   nextPage() {
@@ -224,13 +226,30 @@ export class DataTableComponent {
   }
 
   pageNumber() {
-    let totalPages = Math.ceil(this.suppliers.length / this.pageSize);
+    let totalPages = Math.ceil(this.filteredSuppliers.length / this.pageSize);
 
     return new Array(totalPages);
   }
 
   changePage(pageNumber: number) {
     this.currentPage = pageNumber;
+    this.visibleData();
+  }
+
+  filterData(searchTerm: string) {
+    this.filteredSuppliers = this.suppliers.filter((supplier) => {
+      if (
+        supplier.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        supplier.address.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        supplier.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        supplier.phone.toLowerCase().includes(searchTerm.toLowerCase())
+      ) {
+        return supplier;
+      } else {
+        return null;
+      }
+    });
+
     this.visibleData();
   }
 }
