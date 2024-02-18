@@ -5,8 +5,6 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './data-table.component.html',
-  styleUrl: './data-table.component.css'
+  styleUrl: './data-table.component.css',
 })
-export class DataTableComponent {
-
-}
+export class DataTableComponent {}
