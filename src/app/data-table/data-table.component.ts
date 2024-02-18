@@ -238,6 +238,7 @@ export class DataTableComponent {
   }
 
   filterData(searchTerm: string) {
+    searchTerm = searchTerm.trim();
     this.filteredSuppliers = this.suppliers.filter((supplier) => {
       if (
         supplier.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -250,7 +251,7 @@ export class DataTableComponent {
         return null;
       }
     });
-
+    this.currentPage = 1;
     this.visibleData();
   }
 

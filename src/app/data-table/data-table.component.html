@@ -30,7 +30,7 @@
       </tr>
     </thead>
     <tbody>
-      @for (supplier of visibleData(); track $index) {
+      @for (supplier of visibleData(); track supplier.name) {
       <tr class="border-2">
         <td class="p-3 border-2">
           {{ $index + 1 + (currentPage - 1) * pageSize }}
