@@ -22,14 +22,16 @@
       </tr>
     </thead>
     <tbody>
+      @for (supplier of suppliers; track $index) {
       <tr class="border-2">
-        <td class="p-3 border-2">1</td>
-        <td class="p-3 border-2">Supplier 1</td>
-        <td class="p-3 border-2">Address 1</td>
-        <td class="p-3 border-2">supplier&#64;gmail.com</td>
-        <td class="p-3 border-2">0123456789</td>
+        <td class="p-3 border-2">{{ $index + 1 }}</td>
+        <td class="p-3 border-2">{{ supplier.name }}</td>
+        <td class="p-3 border-2">{{ supplier.address }}</td>
+        <td class="p-3 border-2">{{ supplier.email }}</td>
+        <td class="p-3 border-2">{{ supplier.phone }}</td>
         <td class="p-3 border-2"></td>
       </tr>
+      }
     </tbody>
   </table>
 
