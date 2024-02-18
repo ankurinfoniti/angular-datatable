@@ -7,8 +7,14 @@
       (input)="filterData(search.value)"
       #search
     />
-    <select class="border p-2 rounded-lg">
-      <option value="">Test</option>
+    <select
+      class="border p-2 rounded-lg"
+      #pageSize
+      (change)="changePageSize(pageSize.value)"
+    >
+      @for (pageSize of pageSizes; track $index) {
+      <option [value]="pageSize">{{ pageSize }}</option>
+      }
     </select>
   </div>
 

@@ -17,6 +17,7 @@ interface Supplier {
 export class DataTableComponent {
   currentPage: number = 1;
   pageSize: number = 5;
+  pageSizes: number[] = [5, 10, 20];
 
   suppliers: Supplier[] = [
     {
@@ -250,6 +251,12 @@ export class DataTableComponent {
       }
     });
 
+    this.visibleData();
+  }
+
+  changePageSize(pageSize: string) {
+    this.pageSize = +pageSize;
+    this.currentPage = 1;
     this.visibleData();
   }
 }
