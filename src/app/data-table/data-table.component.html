@@ -9,8 +9,8 @@
     />
     <select
       class="border p-2 rounded-lg"
-      #pageSize
-      (change)="changePageSize(pageSize.value)"
+      #pageSizeInput
+      (change)="changePageSize(pageSizeInput.value)"
     >
       @for (pageSize of pageSizes; track $index) {
       <option [value]="pageSize">{{ pageSize }}</option>
@@ -32,7 +32,9 @@
     <tbody>
       @for (supplier of visibleData(); track $index) {
       <tr class="border-2">
-        <td class="p-3 border-2">{{ $index + 1 }}</td>
+        <td class="p-3 border-2">
+          {{ $index + 1 + (currentPage - 1) * pageSize }}
+        </td>
         <td class="p-3 border-2">{{ supplier.name }}</td>
         <td class="p-3 border-2">{{ supplier.address }}</td>
         <td class="p-3 border-2">{{ supplier.email }}</td>
