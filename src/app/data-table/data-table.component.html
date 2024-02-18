@@ -22,7 +22,7 @@
       </tr>
     </thead>
     <tbody>
-      @for (supplier of suppliers; track $index) {
+      @for (supplier of visibleData(); track $index) {
       <tr class="border-2">
         <td class="p-3 border-2">{{ $index + 1 }}</td>
         <td class="p-3 border-2">{{ supplier.name }}</td>
@@ -38,12 +38,23 @@
   <div class="mt-4 flex items-center justify-center">
     <button
       class="text-cyan-500 border-4 py-2 px-4 rounded-l-lg cursor-pointer mr-5"
+      (click)="previousPage()"
     >
       Previous
     </button>
-    <button class="py-2 px-4 cursor-pointer bg-cyan-500 text-white">1</button>
+    @for (totalPage of pageNumber(); track $index) {
+    <button
+      class="py-2 px-4 cursor-pointer"
+      [class.bg-cyan-500]="$index + 1 === currentPage"
+      [class.text-white]="$index + 1 === currentPage"
+      (click)="changePage($index + 1)"
+    >
+      {{ $index + 1 }}
+    </button>
+    }
     <button
       class="text-cyan-500 border-4 py-2 px-4 rounded-r-lg cursor-pointer ml-5"
+      (click)="nextPage()"
     >
       Next
     </button>

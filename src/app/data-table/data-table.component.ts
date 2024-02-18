@@ -15,6 +15,9 @@ interface Supplier {
   styleUrl: './data-table.component.css',
 })
 export class DataTableComponent {
+  currentPage: number = 1;
+  pageSize: number = 5;
+
   suppliers: Array<Supplier> = [
     {
       name: 'Supplier 1',
@@ -197,4 +200,37 @@ export class DataTableComponent {
       phone: '123-456-7890',
     },
   ];
+
+  ngOnInit(): void {
+    this.visibleData();
+    this.pageNumber();
+  }
+
+  visibleData() {
+    let startIndex = (this.currentPage - 1) * this.pageSize;
+    let endIndex = startIndex + this.pageSize;
+
+    return this.suppliers.slice(startIndex, endIndex);
+  }
+
+  nextPage() {
+    this.currentPage++;
+    this.visibleData();
+  }
+
+  previousPage() {
+    this.currentPage--;
+    this.visibleData();
+  }
+
+  pageNumber() {
+    let totalPages = Math.ceil(this.suppliers.length / this.pageSize);
+
+    return new Array(totalPages);
+  }
+
+  changePage(pageNumber: number) {
+    this.currentPage = pageNumber;
+    this.visibleData();
+  }
 }
